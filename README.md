@@ -91,7 +91,7 @@ what makes magenta read as an event rather than decoration.
 | `kitty.conf`, `ghostty.conf`, `alacritty.toml`, `foot.ini` | Terminal palettes and opacity. |
 | `btop.theme` | Slate boxes, lavender throughput, magenta load; no mint. |
 | `icons.theme` | `Yaru-purple-dark`. |
-| `backgrounds/` | Four 2560×1440 wallpapers: lattice, noir ring, lavender veil, signal. |
+| `backgrounds/` | Four 2560×1440 wallpapers. The signal rings are the default; lattice, noir ring and lavender veil follow. |
 | `unlock.png` | The Omarchy wordmark in lavender, for Plymouth. |
 | `preview.png`, `preview-unlock.png` | The desktop and the lock screen. |
 | `design/wallpapers.py` | Regenerates the four wallpapers from the five anchors. |

@@ -413,10 +413,10 @@ def signal_hex(size: tuple[int, int]) -> Image.Image:
 
 
 WALLPAPERS = {
-    "01-holo-lattice.png": holo_lattice,
-    "02-noir-hex.png": noir_hex,
-    "03-lavender-veil.png": lavender_veil,
-    "04-signal-hex.png": signal_hex,
+    "01-signal-hex.png": signal_hex,
+    "02-holo-lattice.png": holo_lattice,
+    "03-noir-hex.png": noir_hex,
+    "04-lavender-veil.png": lavender_veil,
 }
 
 

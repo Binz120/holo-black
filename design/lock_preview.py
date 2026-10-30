@@ -78,7 +78,7 @@ def lock_icon(draw: ImageDraw.ImageDraw, x: float, y: float, size: float, colour
 
 def main() -> None:
     # ── Lock-screen concept ────────────────────────────────────────────────
-    background = Image.open(THEME / "backgrounds" / "02-noir-hex.png").convert("RGB")
+    background = Image.open(THEME / "backgrounds" / "01-signal-hex.png").convert("RGB")
     background = background.resize((1920, 1080), Image.Resampling.LANCZOS)
     background = background.filter(ImageFilter.GaussianBlur(2.4))
     background = ImageChops.multiply(background, Image.new("RGB", background.size, (120, 120, 132)))
