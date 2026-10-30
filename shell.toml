@@ -1,0 +1,160 @@
+# Holo Black — the shell surfaces.
+#
+# One glass room, partitioned by lavender: the bar, the menus and the cards are
+# the same indigo-black pane at different depths, and the only saturated light
+# is the magenta of something asking to be noticed. No mint lives here — the
+# shell has no success state, and the rule is that mint means exactly one thing.
+
+[bar]
+# A pane floating a little above the wallpaper rather than a strip painted on
+# top of it. Alpha < 1 is what lets the glassy bar profile blur the room behind.
+background       = "#070B16"
+background-alpha = 0.82
+text             = "#DCDDF7"
+# Attention modules: recording, voxtype, alerts, updates. Magenta, never mint.
+active           = "#FF4FD8"
+scale-with-font  = true
+size-horizontal  = 26
+size-vertical    = 28
+
+[hyprland]
+# Lavender to magenta, the hologram catching the window edge. The shell mirrors
+# this on lock, polkit and notification borders so every card agrees with the
+# window it sits over.
+active-border            = "rgba(b8b8ffee) rgba(ff4fd8bb) 45deg"
+active-border-foreground = "#B8B8FF"
+
+[controls]
+# Idle chrome is slate; hover lifts it to lavender; focus is lavender at full
+# strength. Magenta never appears in a control unless it is a change.
+normal-color        = "#C4C6E8"
+normal-fill-alpha   = 0.035
+normal-border       = "#2A2F45"
+normal-border-width = 1
+normal-border-alpha = 0.9
+
+hover-cursor-color        = "#DCDDF7"
+hover-cursor-fill-alpha   = 0.07
+hover-cursor-border       = "#B8B8FF"
+hover-cursor-border-width = 1
+hover-cursor-border-alpha = 0.4
+
+focus-color        = "#B8B8FF"
+focus-fill-alpha   = 0.10
+focus-border       = "#B8B8FF"
+focus-border-width = 1
+focus-border-alpha = 0.7
+
+selected-color        = "#E6E7FF"
+selected-fill-alpha   = 0.14
+selected-border       = "#B8B8FF"
+selected-border-width = 0
+selected-border-alpha = 1.0
+
+pressed-fill-alpha   = 0.20
+selection-fill-alpha = 0.30
+
+[spacing]
+scale = 1.0
+scale-with-font = true
+
+[font]
+base-size = 12
+
+[popups]
+# Raised panes: a touch lighter than the bar, still see-through, with the
+# hologram border doing the work of separating them from the room.
+background       = "#0D1324"
+background-alpha = 0.92
+text             = "#DCDDF7"
+border           = "hyprland.active-border"
+border-alpha     = 0.9
+border-width     = 1
+
+[tooltip]
+background       = "#05080F"
+background-alpha = 0.95
+text             = "#C4C6E8"
+border           = "hyprland.active-border-foreground"
+border-alpha     = 0.55
+border-width     = 1
+
+[notifications]
+background       = "#0D1324"
+background-alpha = 0.94
+text             = "#DCDDF7"
+border           = "hyprland.active-border"
+border-alpha     = 0.9
+border-width     = 1
+# The countdown bar is a change in progress: magenta, like everything that moves.
+countdown        = "#FF4FD8"
+
+[launcher]
+background                = "#0D1324"
+background-alpha          = 0.92
+text                      = "#DCDDF7"
+border                    = "hyprland.active-border"
+border-alpha              = 0.9
+border-width              = 1
+scrim                     = "#05080F"
+scrim-alpha               = 0.58
+# The selected row is lit from within, not filled: lavender wash, lavender text.
+selected-background       = "#B8B8FF"
+selected-background-alpha = 0.10
+selected-text             = "#B8B8FF"
+selected-border           = "#B8B8FF"
+selected-border-alpha     = 0.45
+
+[menu]
+# Cards and rows on the same pane as the launcher, one step deeper.
+background                = "#0B1020"
+background-alpha          = 0.94
+text                      = "#DCDDF7"
+border                    = "hyprland.active-border"
+border-alpha              = 0.9
+border-width              = 1
+scrim                     = "#05080F"
+scrim-alpha               = 0.58
+selected-background       = "#B8B8FF"
+selected-background-alpha = 0.10
+selected-text             = "#B8B8FF"
+selected-border           = "#B8B8FF"
+selected-border-alpha     = 0.45
+
+[polkit]
+background       = "#0B1020"
+background-alpha = 0.96
+text             = "#DCDDF7"
+# Failure is rose, the same hue as ANSI red: it is not a change, and it is
+# emphatically not a success.
+text-error       = "#FF6E9E"
+border           = "hyprland.active-border"
+border-error     = "#FF6E9E"
+border-alpha     = 0.9
+border-width     = 1
+scrim            = "#05080F"
+scrim-alpha      = 0.62
+accent           = "#B8B8FF"
+
+[lock]
+# The room goes dark and the pane floats in it. Typing turns the border to the
+# full lavender–magenta hologram; a wrong password answers in rose.
+background       = "#05080F"
+background-alpha = 0.72
+text             = "#DCDDF7"
+placeholder      = "#767EAD"
+text-error       = "#FF6E9E"
+border           = "hyprland.active-border"
+border-active    = "hyprland.active-border"
+border-error     = "#FF6E9E"
+border-alpha     = 0.9
+border-width     = 1
+selection        = "#B8B8FF"
+selection-alpha  = 0.40
+
+[image-picker]
+text                    = "#DCDDF7"
+selected-border         = "#B8B8FF"
+selected-border-alpha   = 1.0
+unselected-border       = "#2A2F45"
+unselected-border-alpha = 0.9

@@ -1,0 +1,58 @@
+# Holo Black — an indigo-noir desktop lit from behind.
+#
+# Five anchors, and the room they build:
+#
+#   #0A0F1E  ink        the unlit room: background, depth, shadow
+#   #2A2F45  slate      texture: selection, dividers, muted edges, inactive chrome
+#   #B8B8FF  lavender   structure: panels, borders, focus, the lit edge of glass
+#   #FF4FD8  magenta    attention: changes, buttons, alerts, things that just happened
+#   #2EF9B6  mint       success only: confirmation, completion, a clean exit
+#
+# Everything else is a shade mixed from those five, so the palette stays closed.
+# Nothing in the shell, the borders or the bar uses mint unless something
+# actually succeeded — that restraint is what keeps the magenta meaningful.
+#
+# The glass is the idea: indigo-black surfaces, one pixel of lavender catching
+# the edge, and a magenta glint in the window border like a hologram turning.
+
+mode = "dark"
+
+accent = "#B8B8FF"                # Lavender: focus, links, functions, lit edges
+selection = "#2A2F45"             # Slate: selection fill, texture, dividers
+selection_background = "#2A2F45"  # Slate
+selection_foreground = "#E6E7FF"  # Lavender White: text over slate
+muted = "#767EAD"                 # Slate lifted toward lavender: comments, dim chrome
+
+background = "#0A0F1E"            # Ink
+dark_background = "#070B16"       # Ink minus a quarter: bars, recessed panels
+darker_background = "#05080F"     # The room behind the room: scrims, shadows
+lighter_background = "#151B30"    # Slate-tinted panel: raised cards and partitions
+
+foreground = "#DCDDF7"            # Lavender White: body text
+dark_foreground = "#5F668C"       # Deep slate: ANSI black, inactive glyphs
+light_foreground = "#C4C6E8"      # Secondary text, graph labels
+bright_foreground = "#F4F4FF"     # Cursor, emphasis, white-hot
+
+hyprland_active_border = "rgba(b8b8ffee) rgba(ff4fd8bb) 45deg"
+hyprland_inactive_border = "rgba(a9a9e655)"
+
+# ANSI slots double as the code roles the Omarchy templates render. The
+# support hues stay inside the family the five anchors describe — ice, rose,
+# champagne, violet — so terminal output still reads as this room.
+red = "#FF6E9E"                   # Holo rose: errors, deletions
+yellow = "#F5D9A8"                # Champagne: constants, warnings, temperature
+orange = "#FF9ABF"                # Rose-champagne: numbers, changes
+green = "#2EF9B6"                 # Mint: success, additions, clean status
+cyan = "#7CE7FF"                  # Ice: parameters, members, network
+blue = "#B8B8FF"                  # Lavender: functions, structure
+magenta = "#FF4FD8"               # Magenta: attention, keys, modified files
+purple = "#C7A8FF"                # Violet: keywords, storage
+brown = "#6E5A7E"                 # Mauve: rarely used ANSI eighth hue
+
+bright_red = "#FF9FBF"
+bright_yellow = "#FFE9C7"
+bright_green = "#79FFD6"
+bright_cyan = "#B8F1FF"
+bright_blue = "#D9D9FF"
+bright_magenta = "#FF8AE7"
+bright_purple = "#DFC9FF"
