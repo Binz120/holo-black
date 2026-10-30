@@ -13,12 +13,12 @@ only when something succeeds.
 
 ## Apply
 
-Published at [github.com/Binz120/holoblack](https://github.com/Binz120/holoblack).
-Omarchy names a cloned theme after its repository, so a fresh install arrives as
-`Holoblack`; the theme itself is Holo Black.
+Published at [github.com/Binz120/holo-black](https://github.com/Binz120/holo-black).
+Omarchy names a cloned theme after its repository, so a standard install lands on
+`holo-black` and appears as Holo Black.
 
 ```bash
-omarchy theme install https://github.com/Binz120/holoblack
+omarchy theme install https://github.com/Binz120/holo-black
 omarchy theme set "Holo Black"
 ```
 
