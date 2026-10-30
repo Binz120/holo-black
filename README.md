@@ -7,24 +7,14 @@ only when something succeeds.
 
 ![Holo Black preview](preview.png)
 
-**Applied on this machine:** yes — `omarchy theme current` → `Holo Black`.
-
 ---
 
 ## Apply
 
-Published at [github.com/Binz120/holo-black](https://github.com/Binz120/holo-black).
-Omarchy names a cloned theme after its repository, so a standard install lands on
-`holo-black` and appears as Holo Black.
+Install from [github.com/Binz120/holo-black](https://github.com/Binz120/holo-black):
 
 ```bash
 omarchy theme install https://github.com/Binz120/holo-black
-omarchy theme set "Holo Black"
-```
-
-Already on this machine:
-
-```bash
 omarchy theme set "Holo Black"
 ```
 
