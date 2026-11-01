@@ -12,6 +12,7 @@ glyphs stay the project's own.
 
     python3 design/lock_preview.py
     python3 design/lock_preview.py --wordmark ~/some/unlock.png
+    python3 design/lock_preview.py --wordmark unlock.png --out /tmp/preview
 """
 
 from __future__ import annotations
@@ -25,7 +26,6 @@ from PIL import Image, ImageChops, ImageDraw, ImageFilter
 LAVENDER = (184, 184, 255)
 INK = (5, 8, 15)
 TEXT = (220, 221, 247)
-MUTED = (118, 126, 173)
 
 HERE = Path(__file__).resolve().parent
 THEME = HERE.parent
@@ -53,10 +53,11 @@ def find_wordmark(override: str | None) -> Path:
 
 def wordmark(width: int, source_path: Path) -> Image.Image:
     source = Image.open(source_path).convert("RGBA")
-    alpha = source.getchannel("A")
     tinted = Image.new("RGBA", source.size, LAVENDER + (0,))
-    tinted.putalpha(alpha)
+    tinted.putalpha(source.getchannel("A"))
     height = round(width * source.height / source.width)
+    if (width, height) == source.size:
+        return tinted  # already at this size: keep the glyph edges untouched
     return tinted.resize((width, height), Image.Resampling.LANCZOS)
 
 
@@ -104,8 +105,11 @@ def main() -> None:
         description="Regenerate the Holo Black lock preview and Plymouth wordmark.")
     parser.add_argument("--wordmark", help="path to an Omarchy wordmark PNG "
                         "(default: a stock theme's, else this theme's own)")
+    parser.add_argument("--out", default=str(THEME), help="output directory (default: the theme)")
     args = parser.parse_args()
     source_path = find_wordmark(args.wordmark)
+    out_dir = Path(args.out)
+    out_dir.mkdir(parents=True, exist_ok=True)
 
     # ── Lock-screen concept ────────────────────────────────────────────────
     background = Image.open(THEME / "backgrounds" / "01-signal-hex.webp").convert("RGB")
@@ -145,13 +149,13 @@ def main() -> None:
         draw.ellipse([cx - 4, dot_y - 4, cx + 4, dot_y + 4], fill=TEXT + (235,))
 
     canvas.alpha_composite(overlay)
-    canvas.convert("RGB").save(THEME / "preview-unlock.png", optimize=True)
-    print(f"wrote {THEME / 'preview-unlock.png'}")
+    canvas.convert("RGB").save(out_dir / "preview-unlock.png", optimize=True)
+    print(f"wrote {out_dir / 'preview-unlock.png'}")
 
     # ── Plymouth wordmark ──────────────────────────────────────────────────
     mark = wordmark(800, source_path)
-    mark.save(THEME / "unlock.png", optimize=True)
-    print(f"wrote {THEME / 'unlock.png'}")
+    mark.save(out_dir / "unlock.png", optimize=True)
+    print(f"wrote {out_dir / 'unlock.png'}")
 
 
 if __name__ == "__main__":
