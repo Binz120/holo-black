@@ -6,14 +6,18 @@ Renders two files from the theme's own artwork:
     preview-unlock.png   1920x1080 lock-screen concept
     unlock.png           800x188 Omarchy wordmark in lavender, for Plymouth
 
-The wordmark is the Omarchy logo, taken from the stock themes as an alpha mask
-and recoloured, so the glyphs stay the project's own.
+The wordmark is the Omarchy logo, taken from a stock theme, from any theme
+already installed, or from --wordmark, as an alpha mask and recoloured, so the
+glyphs stay the project's own.
 
     python3 design/lock_preview.py
+    python3 design/lock_preview.py --wordmark ~/some/unlock.png
 """
 
 from __future__ import annotations
 
+import argparse
+import os
 from pathlib import Path
 
 from PIL import Image, ImageChops, ImageDraw, ImageFilter
@@ -25,11 +29,30 @@ MUTED = (118, 126, 173)
 
 HERE = Path(__file__).resolve().parent
 THEME = HERE.parent
-STOCK_WORDMARK = Path("/usr/share/omarchy/themes/catppuccin/unlock.png")
+OMARCHY = Path(os.environ.get("OMARCHY_PATH", "/usr/share/omarchy"))
 
 
-def wordmark(width: int) -> Image.Image:
-    source = Image.open(STOCK_WORDMARK).convert("RGBA")
+def find_wordmark(override: str | None) -> Path:
+    """The Omarchy wordmark to recolour.
+
+    An explicit path wins; otherwise any stock theme's copy, then this theme's
+    own `unlock.png`, so the script still runs where Omarchy is not installed.
+    """
+    if override:
+        path = Path(override)
+        if not path.is_file():
+            raise SystemExit(f"No such wordmark: {path}")
+        return path
+
+    for candidate in [*sorted((OMARCHY / "themes").glob("*/unlock.png")), THEME / "unlock.png"]:
+        if candidate.is_file():
+            return candidate
+
+    raise SystemExit("No wordmark found; pass --wordmark /path/to/unlock.png")
+
+
+def wordmark(width: int, source_path: Path) -> Image.Image:
+    source = Image.open(source_path).convert("RGBA")
     alpha = source.getchannel("A")
     tinted = Image.new("RGBA", source.size, LAVENDER + (0,))
     tinted.putalpha(alpha)
@@ -77,8 +100,15 @@ def lock_icon(draw: ImageDraw.ImageDraw, x: float, y: float, size: float, colour
 
 
 def main() -> None:
+    parser = argparse.ArgumentParser(
+        description="Regenerate the Holo Black lock preview and Plymouth wordmark.")
+    parser.add_argument("--wordmark", help="path to an Omarchy wordmark PNG "
+                        "(default: a stock theme's, else this theme's own)")
+    args = parser.parse_args()
+    source_path = find_wordmark(args.wordmark)
+
     # ── Lock-screen concept ────────────────────────────────────────────────
-    background = Image.open(THEME / "backgrounds" / "01-signal-hex.png").convert("RGB")
+    background = Image.open(THEME / "backgrounds" / "01-signal-hex.webp").convert("RGB")
     background = background.resize((1920, 1080), Image.Resampling.LANCZOS)
     background = background.filter(ImageFilter.GaussianBlur(2.4))
     background = ImageChops.multiply(background, Image.new("RGB", background.size, (120, 120, 132)))
@@ -88,7 +118,7 @@ def main() -> None:
 
     canvas = background.convert("RGBA")
 
-    mark = wordmark(700)
+    mark = wordmark(700, source_path)
     mark_x = (1920 - mark.width) // 2
     mark_y = 300
     canvas.alpha_composite(mark, (mark_x, mark_y))
@@ -119,7 +149,7 @@ def main() -> None:
     print(f"wrote {THEME / 'preview-unlock.png'}")
 
     # ── Plymouth wordmark ──────────────────────────────────────────────────
-    mark = wordmark(800)
+    mark = wordmark(800, source_path)
     mark.save(THEME / "unlock.png", optimize=True)
     print(f"wrote {THEME / 'unlock.png'}")
 

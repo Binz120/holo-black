@@ -6,7 +6,7 @@
 -- else stays slate so the glint keeps its meaning.
 
 local lavender = "rgba(b8b8ffee)"
-local magenta = "rgba(ff4fd8aa)"
+local magenta = "rgba(ff4fd8bb)"
 local inactive_edge = "rgba(a9a9e655)"
 
 local active_border = { colors = { lavender, magenta }, angle = 45 }

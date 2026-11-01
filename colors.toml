@@ -21,7 +21,8 @@ accent = "#B8B8FF"                # Lavender: focus, links, functions, lit edges
 selection = "#2A2F45"             # Slate: selection fill, texture, dividers
 selection_background = "#2A2F45"  # Slate
 selection_foreground = "#E6E7FF"  # Lavender White: text over slate
-muted = "#767EAD"                 # Slate lifted toward lavender: comments, dim chrome
+muted = "#9095CE"                  # Slate lifted toward lavender: comments, dim chrome
+                                  # (4.5:1 on slate, so comments read inside a selection)
 
 background = "#0A0F1E"            # Ink
 dark_background = "#070B16"       # Ink minus a quarter: bars, recessed panels
@@ -29,7 +30,7 @@ darker_background = "#05080F"     # The room behind the room: scrims, shadows
 lighter_background = "#151B30"    # Slate-tinted panel: raised cards and partitions
 
 foreground = "#DCDDF7"            # Lavender White: body text
-dark_foreground = "#5F668C"       # Deep slate: ANSI black, inactive glyphs
+dark_foreground = "#5F668C"       # Deep slate: btop's low gradient step, recessed glyphs
 light_foreground = "#C4C6E8"      # Secondary text, graph labels
 bright_foreground = "#F4F4FF"     # Cursor, emphasis, white-hot
 

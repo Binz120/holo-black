@@ -8,10 +8,12 @@ or retuned without touching an image editor:
     #FF4FD8 magenta    #2EF9B6 mint
 
 Mint is deliberately absent: in this theme it means "success", and a wallpaper
-is decoration. Run from anywhere:
+is decoration. The grain is seeded per wallpaper, so a run reproduces the
+committed set exactly. Run from anywhere:
 
-    python3 design/wallpapers.py            # all four, 2560x1440
-    python3 design/wallpapers.py --size 3840x2160
+    python3 design/wallpapers.py                   # all four, 2560x1440 WebP
+    python3 design/wallpapers.py --size 3840x2160  # larger set
+    python3 design/wallpapers.py --format png      # PNG instead of WebP
 """
 
 from __future__ import annotations
@@ -111,9 +113,22 @@ def hex_lattice(width: int, height: int, radius: float, rotation: float = 0.0) -
     return centres
 
 
-def grain(image: Image.Image, amount: float = 0.35, sigma: float = 22) -> Image.Image:
-    noise = Image.effect_noise(image.size, sigma).convert("RGB")
-    return Image.blend(image, ImageChops.overlay(image, noise), amount)
+def grain(image: Image.Image, amount: float = 0.35, sigma: float = 22, seed: int = 0) -> Image.Image:
+    """Deterministic film grain.
+
+    `Image.effect_noise` cannot be seeded, and unseeded noise means the committed
+    wallpapers could never be rebuilt. Instead two seeded uniform layers are
+    averaged into a gaussian-like bell and rescaled to `sigma`.
+    """
+    width, height = image.size
+    layers = [
+        Image.frombytes("L", (width, height), random.Random(seed + index).randbytes(width * height))
+        for index in range(2)
+    ]
+    noise = Image.blend(layers[0], layers[1], 0.5)
+    # Two averaged uniforms carry a standard deviation of about 52; scale to sigma.
+    noise = noise.point(lambda v: max(0, min(255, round(128 + (v - 128) * sigma / 52))))
+    return Image.blend(image, ImageChops.overlay(image, noise.convert("RGB")), amount)
 
 
 def scanlines(size: tuple[int, int], alpha: int = 10, spacing: int = 4) -> Image.Image:
@@ -202,7 +217,7 @@ def holo_lattice(size: tuple[int, int]) -> Image.Image:
     base = Image.alpha_composite(base.convert("RGBA"), trace).convert("RGB")
 
     base = base.resize((out_width, out_height), Image.Resampling.LANCZOS)
-    base = grain(base, 0.28)
+    base = grain(base, 0.28, seed=2)
     base = Image.alpha_composite(base.convert("RGBA"), scanlines(size, 8, 4)).convert("RGB")
     return vignette(base, 0.38)
 
@@ -269,7 +284,7 @@ def noir_hex(size: tuple[int, int]) -> Image.Image:
     base = Image.alpha_composite(base.convert("RGBA"), reflection).convert("RGB")
 
     base = base.resize((out_width, out_height), Image.Resampling.LANCZOS)
-    base = grain(base, 0.32)
+    base = grain(base, 0.32, seed=3)
     base = Image.alpha_composite(base.convert("RGBA"), scanlines(size, 10, 3)).convert("RGB")
     return vignette(base, 0.44)
 
@@ -339,7 +354,7 @@ def lavender_veil(size: tuple[int, int]) -> Image.Image:
     base = ImageChops.screen(base, glow(canvas, (width * 0.5, height * 0.735), width * 0.55, LAVENDER, 0.14, 3.0))
 
     base = base.resize((out_width, out_height), Image.Resampling.LANCZOS)
-    base = grain(base, 0.24)
+    base = grain(base, 0.24, seed=4)
     base = Image.alpha_composite(base.convert("RGBA"), scanlines(size, 6, 5)).convert("RGB")
     return vignette(base, 0.40)
 
@@ -407,16 +422,16 @@ def signal_hex(size: tuple[int, int]) -> Image.Image:
     base = Image.alpha_composite(base.convert("RGBA"), frame).convert("RGB")
 
     base = base.resize((out_width, out_height), Image.Resampling.LANCZOS)
-    base = grain(base, 0.26)
+    base = grain(base, 0.26, seed=1)
     base = Image.alpha_composite(base.convert("RGBA"), scanlines(size, 12, 3)).convert("RGB")
     return vignette(base, 0.42)
 
 
 WALLPAPERS = {
-    "01-signal-hex.png": signal_hex,
-    "02-holo-lattice.png": holo_lattice,
-    "03-noir-hex.png": noir_hex,
-    "04-lavender-veil.png": lavender_veil,
+    "01-signal-hex": signal_hex,
+    "02-holo-lattice": holo_lattice,
+    "03-noir-hex": noir_hex,
+    "04-lavender-veil": lavender_veil,
 }
 
 
@@ -425,19 +440,25 @@ def main() -> None:
     parser.add_argument("--size", default="2560x1440", help="WIDTHxHEIGHT (default 2560x1440)")
     parser.add_argument("--out", default=str(OUT_DIR), help="output directory")
     parser.add_argument("--only", choices=sorted(WALLPAPERS), help="render a single wallpaper")
+    parser.add_argument("--format", choices=("webp", "png"), default="webp",
+                        help="output format (default webp: a 3 MB png becomes ~140 KB)")
     args = parser.parse_args()
 
     width, height = (int(part) for part in args.size.lower().split("x"))
     out_dir = Path(args.out)
     out_dir.mkdir(parents=True, exist_ok=True)
 
-    for name, painter in WALLPAPERS.items():
-        if args.only and name != args.only:
+    for stem, painter in WALLPAPERS.items():
+        if args.only and stem != args.only:
             continue
-        print(f"rendering {name} at {width}x{height} …", flush=True)
+        print(f"rendering {stem} at {width}x{height} …", flush=True)
         image = painter((width, height))
-        image.save(out_dir / name, optimize=True)
-        print(f"  wrote {out_dir / name}")
+        path = out_dir / f"{stem}.{args.format}"
+        if args.format == "webp":
+            image.save(path, quality=92, method=6)
+        else:
+            image.save(path, optimize=True)
+        print(f"  wrote {path} ({path.stat().st_size // 1024} KiB)")
 
 
 if __name__ == "__main__":
