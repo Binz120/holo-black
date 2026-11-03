@@ -5,7 +5,8 @@ floating in an unlit room. Indigo black and slate make the room; lavender is the
 edge of every pane; magenta is the glint of something changing; mint appears
 only when something succeeds.
 
-![Holo Black preview](preview.png)
+![Holo Black with a browser and an editor open](preview.png?v=2)
+![Holo Black in a terminal session](preview-terminal.png)
 
 ---
 
@@ -111,7 +112,7 @@ what makes magenta read as an event rather than decoration.
 | `icons.theme` | `Yaru-purple-dark`. |
 | `backgrounds/` | Four 2560×1440 wallpapers, WebP (about 150 KB each). The signal rings are the default; lattice, noir ring and lavender veil follow. |
 | `unlock.png` | The Omarchy wordmark in lavender, for Plymouth. |
-| `preview.png`, `preview-unlock.png` | The desktop and the lock screen. |
+| `preview.png`, `preview-terminal.png`, `preview-unlock.png` | A browser-and-editor session, a terminal session, and the lock screen. |
 | `design/wallpapers.py` | Regenerates the four wallpapers from the five anchors; the grain is seeded, so it rebuilds the committed set. |
 | `design/lock_preview.py` | Regenerates the lock preview and the Plymouth wordmark. |
 | `design/check.py` | Checks the terminal palettes and borders against `colors.toml`. |
