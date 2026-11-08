@@ -55,8 +55,8 @@ for errors) and keeps them inside the same hue family.
 
 **The mint rule.** There is no mint in `shell.toml`, none in `btop.theme`, and
 none in the wallpapers. It appears in the terminal palette because `green` must
-mean success there, and in the preview's two success marks. That restraint is
-what makes magenta read as an event rather than decoration.
+mean success there. That restraint is what makes magenta read as an event
+rather than decoration.
 
 ---
 
