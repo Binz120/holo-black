@@ -90,7 +90,27 @@ No stock files are touched: everything lives in
 
 ---
 
+## Wallpapers
+
+The four stills are third-party artwork hosted on Wallhaven. These uploads list
+no original artist, so each is credited to the uploader the page names, with the
+source link.
+
+| File | Artwork | Wallhaven | Uploader |
+|---|---|---|---|
+| `01-manga-gaze.webp` | Hinata Hyuga (*Naruto Shippuden*), monochrome close-up | [`nml114`](https://wallhaven.cc/w/nml114) | Apollo |
+| `02-gas-mask.webp` | Gas-mask character, monochrome | [`017zjv`](https://wallhaven.cc/w/017zjv) | sanecross |
+| `03-violet-duo.webp` | Daft Punk, chromatic aberration on violet | [`8xpvy2`](https://wallhaven.cc/w/8xpvy2) | Deewa |
+| `04-noir-portrait.webp` | Monochrome portrait on black | [`w55gjr`](https://wallhaven.cc/w/w55gjr) | Zarki |
+
+The stills are cropped to 16:9 for the theme, the intro clips are derived from
+them, and the preview screenshots show them.
+
+---
+
 ## License
 
-MIT — see [`LICENSE`](LICENSE). The Omarchy wordmark in `unlock.png` is the
-Omarchy project's; this theme only recolours it.
+MIT — see [`LICENSE`](LICENSE) — covers the theme files (palette, configs,
+scripts and README). The wallpapers and their intros are third-party artwork and
+remain their authors'/uploaders'; they are not licensed under MIT. The Omarchy
+wordmark in `unlock.png` is the Omarchy project's; this theme only recolours it.
