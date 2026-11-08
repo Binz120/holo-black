@@ -5,7 +5,7 @@ floating in an unlit room. Indigo black and slate make the room; lavender is the
 edge of every pane; magenta is the glint of something changing; mint appears
 only when something succeeds.
 
-![Holo Black with a browser and an editor open](preview.png?v=2)
+![Holo Black with terminals, a file manager and an editor open](preview.png?v=3)
 ![Holo Black in a terminal session](preview-terminal.png)
 ![Holo Black on an empty desktop](preview-wallpaper.png)
 
@@ -80,9 +80,10 @@ what makes magenta read as an event rather than decoration.
 | `shell.toml` | Bar, menus, launcher, notifications, polkit, lock, image picker. |
 | `btop.theme` | Slate boxes, lavender throughput, magenta load; no mint. |
 | `icons.theme` | `Yaru-purple-dark`. |
-| `backgrounds/` | Four 2560×1440 wallpapers, WebP (about 150 KB each). The signal rings are the default; lattice, noir ring and lavender veil follow. |
+| `backgrounds/` | Four 16:9 wallpapers, WebP: `01-manga-gaze` and `04-noir-portrait` at 2560×1440, `02-gas-mask` and `03-violet-duo` at 1920×1080. The first is the default. |
+| `backgrounds/intros/` | One 5.4 s silent H.264 clip per wallpaper, named after its still. Each opens slightly tight and off-centre, resolves a brief hologram chroma split and a lavender/ice/magenta scan band, and settles on the exact framing of the still. |
 | `unlock.png` | The Omarchy wordmark in lavender, for Plymouth. |
-| `preview.png`, `preview-terminal.png`, `preview-wallpaper.png`, `preview-unlock.png` | A browser-and-editor session, a terminal session, the bare desktop, and the lock screen. |
+| `preview.png`, `preview-terminal.png`, `preview-wallpaper.png`, `preview-unlock.png` | A terminal, file-manager and editor session; a terminal session with fastfetch and btop; the bare desktop; the lock screen. |
 
 No stock files are touched: everything lives in
 `~/.config/omarchy/themes/holo-black/`.
