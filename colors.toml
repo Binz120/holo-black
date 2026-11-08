@@ -39,7 +39,7 @@ hyprland_inactive_border = "rgba(a9a9e655)"
 
 # ANSI slots double as the code roles the Omarchy templates render. The
 # support hues stay inside the family the five anchors describe — ice, rose,
-# champagne, violet — so terminal output still reads as this room.
+# champagne — so terminal output still reads as this room.
 red = "#FF6E9E"                   # Holo rose: errors, deletions
 yellow = "#F5D9A8"                # Champagne: constants, warnings, temperature
 orange = "#FF9ABF"                # Rose-champagne: numbers, changes
@@ -47,7 +47,6 @@ green = "#2EF9B6"                 # Mint: success, additions, clean status
 cyan = "#7CE7FF"                  # Ice: parameters, members, network
 blue = "#B8B8FF"                  # Lavender: functions, structure
 magenta = "#FF4FD8"               # Magenta: attention, keys, modified files
-purple = "#C7A8FF"                # Violet: keywords, storage
 brown = "#6E5A7E"                 # Mauve: rarely used ANSI eighth hue
 
 bright_red = "#FF9FBF"
@@ -56,4 +55,3 @@ bright_green = "#79FFD6"
 bright_cyan = "#B8F1FF"
 bright_blue = "#D9D9FF"
 bright_magenta = "#FF8AE7"
-bright_purple = "#DFC9FF"

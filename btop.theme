@@ -29,16 +29,16 @@ theme[temp_mid]="#F5D9A8"
 theme[temp_end]="#FF6E9E"
 
 theme[cpu_start]="#B8B8FF"
-theme[cpu_mid]="#C7A8FF"
+theme[cpu_mid]="#B8B8FF"
 theme[cpu_end]="#FF4FD8"
 
 theme[free_start]="#7CE7FF"
 theme[free_mid]="#B8B8FF"
-theme[free_end]="#C7A8FF"
+theme[free_end]="#B8B8FF"
 
 theme[cached_start]="#B8B8FF"
 theme[cached_mid]="#7CE7FF"
-theme[cached_end]="#C7A8FF"
+theme[cached_end]="#B8B8FF"
 
 theme[available_start]="#F5D9A8"
 theme[available_mid]="#FF9ABF"
@@ -46,7 +46,7 @@ theme[available_end]="#FF6E9E"
 
 theme[used_start]="#7CE7FF"
 theme[used_mid]="#B8B8FF"
-theme[used_end]="#C7A8FF"
+theme[used_end]="#B8B8FF"
 
 theme[download_start]="#F5D9A8"
 theme[download_mid]="#FF9ABF"
@@ -54,10 +54,10 @@ theme[download_end]="#FF6E9E"
 
 theme[upload_start]="#7CE7FF"
 theme[upload_mid]="#B8B8FF"
-theme[upload_end]="#C7A8FF"
+theme[upload_end]="#B8B8FF"
 
 theme[process_start]="#B8B8FF"
-theme[process_mid]="#C7A8FF"
+theme[process_mid]="#B8B8FF"
 theme[process_end]="#FF4FD8"
 
 theme[gradient_color_0]="#0A0F1E"

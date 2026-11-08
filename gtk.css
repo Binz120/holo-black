@@ -1,0 +1,425 @@
+/*
+ * Holo Black — a GTK 3 and GTK 4 companion
+ * ──────────────────────────────────────────────────────────────────────────
+ * Ink and slate panes, a lavender edge, and magenta reserved for something
+ * asking to be noticed. The shell supplies the glass; GTK surfaces stay opaque
+ * so a GTK app cannot disagree with the room it floats in.
+ *
+ * Every colour below is a colors.toml value or an alpha of one. Radii are 0:
+ * the compositor's corners are square by default.
+ */
+
+/* ── Palette ─────────────────────────────────────────────────────────────── */
+@define-color ink #0A0F1E;          /* the room */
+@define-color chrome #070B16;       /* bar, recessed wells */
+@define-color void #05080F;         /* the deepest dark */
+@define-color raised #151B30;       /* cards, header bars */
+@define-color well #0D1324;         /* views, entries, popovers */
+@define-color wash #2A2F45;         /* selection fill, texture */
+@define-color bone #DCDDF7;         /* body text */
+@define-color stone #C4C6E8;        /* secondary text, rules */
+@define-color muted #9095CE;        /* comments, dim labels */
+@define-color dust #5F668C;         /* disabled, decorative */
+@define-color cream #E6E7FF;        /* text over a selection */
+@define-color white #F4F4FF;        /* maximum emphasis */
+@define-color lavender #B8B8FF;     /* structure: focus, links, lit edge */
+@define-color magenta #FF4FD8;      /* attention: a change */
+@define-color champagne #F5D9A8;    /* warning */
+@define-color mint #2EF9B6;         /* success */
+@define-color ice #7CE7FF;          /* information */
+@define-color rose #FF6E9E;         /* error, destructive */
+@define-color mauve #6E5A7E;        /* the rare ANSI eighth hue */
+
+/* ── Adwaita semantics ───────────────────────────────────────────────────── */
+@define-color accent_bg_color @lavender;
+@define-color accent_fg_color @ink;
+@define-color accent_color @lavender;
+
+@define-color window_bg_color @ink;
+@define-color window_fg_color @bone;
+@define-color view_bg_color @well;
+@define-color view_fg_color @bone;
+
+@define-color headerbar_bg_color @raised;
+@define-color headerbar_fg_color @bone;
+@define-color headerbar_border_color @wash;
+@define-color headerbar_backdrop_color @chrome;
+@define-color headerbar_shade_color alpha(@void, 0.35);
+
+@define-color card_bg_color @raised;
+@define-color card_fg_color @bone;
+@define-color card_shade_color alpha(@void, 0.30);
+
+@define-color dialog_bg_color @raised;
+@define-color dialog_fg_color @bone;
+@define-color popover_bg_color @raised;
+@define-color popover_fg_color @bone;
+
+@define-color sidebar_bg_color @chrome;
+@define-color sidebar_fg_color @bone;
+@define-color sidebar_backdrop_color @ink;
+@define-color sidebar_shade_color alpha(@void, 0.30);
+@define-color secondary_sidebar_bg_color @ink;
+@define-color secondary_sidebar_fg_color @bone;
+@define-color secondary_sidebar_backdrop_color @chrome;
+@define-color secondary_sidebar_shade_color alpha(@void, 0.25);
+
+@define-color destructive_bg_color @rose;
+@define-color destructive_fg_color @cream;
+@define-color success_bg_color @mint;
+@define-color success_fg_color @ink;
+@define-color warning_bg_color @champagne;
+@define-color warning_fg_color @ink;
+@define-color error_bg_color @rose;
+@define-color error_fg_color @cream;
+
+@define-color borders alpha(@stone, 0.18);
+@define-color shade_color alpha(@void, 0.35);
+@define-color scrollbar_outline_color alpha(@ink, 0.90);
+
+/* GTK 3 and plain GTK 4 read these legacy names from Adwaita's built-in
+   sheet; libadwaita's sheet never defines them. Keep them in lockstep. */
+@define-color theme_bg_color @ink;
+@define-color theme_fg_color @bone;
+@define-color theme_base_color @well;
+@define-color theme_text_color @bone;
+@define-color theme_selected_bg_color @wash;
+@define-color theme_selected_fg_color @cream;
+@define-color theme_unfocused_bg_color @ink;
+@define-color theme_unfocused_fg_color @muted;
+@define-color theme_unfocused_base_color @well;
+@define-color theme_unfocused_text_color @muted;
+@define-color theme_unfocused_selected_bg_color @wash;
+@define-color theme_unfocused_selected_fg_color @cream;
+@define-color insensitive_bg_color @ink;
+@define-color insensitive_fg_color @dust;
+@define-color insensitive_base_color @well;
+@define-color unfocused_borders alpha(@stone, 0.12);
+@define-color unfocused_insensitive_color alpha(@dust, 0.70);
+@define-color content_view_bg @well;
+@define-color text_view_bg @well;
+@define-color error_color @rose;
+@define-color warning_color @champagne;
+@define-color success_color @mint;
+
+/* ── Typography ──────────────────────────────────────────────────────────── */
+.title-1, .title-2, .title-3, .title-4,
+headerbar .title,
+label.heading,
+.heading {
+    font-weight: 700;
+}
+
+.dim-label,
+label.dim-label {
+    color: @muted;
+    /* Adwaita keeps .dim-label at 0.55 opacity; the palette already chose a
+       dim colour, so stop the double. */
+    opacity: 1;
+}
+
+/* ── Windows and header bars ─────────────────────────────────────────────── */
+window,
+window.background,
+.background,
+dialog,
+messagedialog {
+    background-color: @ink;
+    color: @bone;
+}
+
+headerbar {
+    background-image: none;
+    background-color: @raised;
+    color: @bone;
+    border-bottom: 1px solid alpha(@lavender, 0.28);
+    border-radius: 0;
+    box-shadow: none;
+    min-height: 40px;
+}
+
+headerbar:backdrop {
+    background-color: @chrome;
+    color: @muted;
+    border-color: alpha(@stone, 0.16);
+}
+
+headerbar entry,
+headerbar spinbutton {
+    background-color: @well;
+    border-color: alpha(@stone, 0.20);
+}
+
+window.csd,
+window.csd > .titlebar,
+window.csd > .background {
+    border-radius: 0;
+}
+
+/* ── Buttons ─────────────────────────────────────────────────────────────── */
+button {
+    background-image: none;
+    background-color: @raised;
+    color: @bone;
+    border: 1px solid alpha(@stone, 0.20);
+    border-radius: 0;
+    box-shadow: none;
+    padding: 6px 12px;
+}
+
+button:hover {
+    background-image: linear-gradient(alpha(@lavender, 0.10), alpha(@lavender, 0.10));
+    border-color: alpha(@lavender, 0.45);
+}
+
+button:active,
+button:checked {
+    background-image: linear-gradient(alpha(@lavender, 0.18), alpha(@lavender, 0.18));
+    border-color: @lavender;
+    color: @white;
+}
+
+button:focus {
+    outline: 2px solid alpha(@lavender, 0.65);
+    outline-offset: -2px;
+}
+
+button.suggested-action {
+    background-color: @lavender;
+    border-color: @magenta;
+    color: @ink;
+}
+
+button.suggested-action:hover {
+    background-image: linear-gradient(alpha(@white, 0.22), alpha(@white, 0.22));
+}
+
+button.destructive-action {
+    background-color: @rose;
+    border-color: alpha(@void, 0.45);
+    color: @cream;
+}
+
+button.destructive-action:hover {
+    background-image: linear-gradient(alpha(@void, 0.18), alpha(@void, 0.18));
+}
+
+button.flat {
+    background-color: transparent;
+    border-color: transparent;
+}
+
+button.flat:hover {
+    background-color: alpha(@lavender, 0.12);
+}
+
+/* ── Entries and views ───────────────────────────────────────────────────── */
+entry,
+spinbutton,
+textview text,
+.view,
+list.view,
+iconview,
+scrolledwindow viewport {
+    background-color: @well;
+    color: @bone;
+    border-radius: 0;
+}
+
+entry,
+spinbutton {
+    border: 1px solid alpha(@stone, 0.20);
+    padding: 6px 10px;
+    box-shadow: none;
+}
+
+entry:focus,
+entry:focus-within,
+spinbutton:focus-within {
+    border-color: @lavender;
+    box-shadow: 0 0 0 1px alpha(@lavender, 0.35);
+}
+
+selection {
+    background-color: @wash;
+    color: @cream;
+}
+
+*:link,
+*:visited {
+    color: @lavender;
+}
+
+/* ── Cards, frames, separators ───────────────────────────────────────────── */
+.card,
+frame > border,
+frame {
+    background-color: @raised;
+    border: 1px solid alpha(@stone, 0.16);
+    border-radius: 0;
+}
+
+separator {
+    background-color: alpha(@stone, 0.16);
+    min-width: 1px;
+    min-height: 1px;
+}
+
+/* ── Lists and sidebars ──────────────────────────────────────────────────── */
+list,
+list > row {
+    background-color: transparent;
+    color: @bone;
+}
+
+row:hover,
+list > row:hover {
+    background-color: alpha(@lavender, 0.07);
+}
+
+row:selected,
+list > row:selected,
+treeview.view:selected,
+columnview > listview > row:selected {
+    background-color: alpha(@lavender, 0.16);
+    color: @white;
+}
+
+.navigation-sidebar,
+.sidebar,
+placessidebar {
+    background-color: @chrome;
+    color: @bone;
+}
+
+.navigation-sidebar row,
+.sidebar row {
+    border-radius: 0;
+}
+
+.navigation-sidebar row:selected,
+.sidebar row:selected {
+    background-color: alpha(@lavender, 0.16);
+    color: @white;
+    box-shadow: inset 2px 0 0 @lavender;
+}
+
+/* ── Popovers, menus, tooltips ───────────────────────────────────────────── */
+popover,
+popover.background,
+menu,
+menubar > item {
+    background-color: @raised;
+    color: @bone;
+    border: 1px solid alpha(@lavender, 0.30);
+    border-radius: 0;
+    box-shadow: 0 10px 24px -16px alpha(@void, 0.9);
+}
+
+popover modelbutton:hover,
+menu menuitem:hover {
+    background-color: alpha(@lavender, 0.12);
+    color: @white;
+}
+
+tooltip {
+    background-color: @bone;
+    color: @ink;
+    border: 1px solid @lavender;
+    border-radius: 0;
+    padding: 4px 8px;
+}
+
+/* ── Controls ────────────────────────────────────────────────────────────── */
+switch:checked {
+    background-color: @lavender;
+}
+
+switch:checked slider {
+    background-color: @ink;
+}
+
+check:checked,
+radio:checked {
+    background-color: @lavender;
+    color: @ink;
+    border-color: @magenta;
+}
+
+scale trough,
+progressbar trough {
+    background-color: @wash;
+    border-radius: 0;
+    min-height: 6px;
+}
+
+scale highlight,
+progressbar progress,
+levelbar block.filled {
+    background-image: linear-gradient(to right, @lavender, @magenta);
+    border-radius: 0;
+}
+
+scale slider {
+    background-color: @bone;
+    border: 2px solid @lavender;
+    border-radius: 0;
+    min-width: 14px;
+    min-height: 14px;
+}
+
+levelbar block.low { background-color: @rose; }
+levelbar block.high { background-color: @mint; }
+levelbar block.full { background-color: @lavender; }
+
+scrollbar slider {
+    background-color: alpha(@stone, 0.35);
+    border-radius: 0;
+    min-width: 6px;
+    min-height: 6px;
+}
+
+scrollbar slider:hover {
+    background-color: @stone;
+}
+
+scrollbar trough {
+    background-color: transparent;
+}
+
+/* ── Header and status surfaces ──────────────────────────────────────────── */
+toolbar {
+    background-color: @raised;
+    border-bottom: 1px solid alpha(@stone, 0.16);
+}
+
+statusbar {
+    background-color: @raised;
+    color: @muted;
+}
+
+infobar.info,
+infobar.question {
+    background-color: alpha(@ice, 0.12);
+    color: @bone;
+    border-bottom: 1px solid alpha(@stone, 0.16);
+}
+
+infobar.warning {
+    background-color: alpha(@champagne, 0.16);
+    color: @bone;
+}
+
+infobar.error {
+    background-color: alpha(@rose, 0.18);
+    color: @bone;
+}
+
+notebook > header tab:checked {
+    box-shadow: inset 0 -2px 0 @lavender;
+    color: @white;
+}
+
+notebook > header tab {
+    color: @muted;
+}

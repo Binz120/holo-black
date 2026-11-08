@@ -5,11 +5,11 @@ floating in an unlit room. Indigo black and slate make the room; lavender is the
 edge of every pane; magenta is the glint of something changing; mint appears
 only when something succeeds.
 
-![Holo Black with terminals, a file manager and an editor open](preview.png?v=3)
-![Holo Black in a terminal session](preview-terminal.png)
-![Holo Black on an empty desktop](preview-wallpaper.png)
+![Holo Black with an editor and a file manager open](preview.webp)
+![Holo Black's palette specimen and btop memory view](preview-terminal.webp)
+![Holo Black on an empty desktop](preview-wallpaper.webp)
 
-`preview.png` is a real screenshot of this desktop (1920×1080) after applying
+`preview.webp` is a real screenshot of this desktop (1920×1080) after applying
 the theme, not a mock-up.
 
 ---
@@ -21,10 +21,10 @@ omarchy theme install https://github.com/Binz120/holo-black
 omarchy theme set "Holo Black"
 ```
 
-The palette, `shell.toml`, `btop.theme`, `icons.theme`, the wallpapers, the
-Plymouth wordmark and the lavender→magenta border all apply. Omarchy renders
-the terminals, the editors and the other apps from `colors.toml`, so they
-follow the same palette.
+The palette, `shell.toml`, `gtk.css`, `btop.theme`, `icons.theme`, the
+wallpapers, the Plymouth wordmark and the lavender→magenta border all apply.
+Omarchy renders the terminals and editors from `colors.toml`; the shipped
+`gtk.css` covers GTK 3 and GTK 4.
 
 Switch between the four backgrounds with:
 
@@ -64,8 +64,9 @@ what makes magenta read as an event rather than decoration.
 
 - Windows: a 2px lavender→magenta hologram border on the focused window and a
   faint lavender edge on the rest.
-- The bar is 82% opaque; menus, launchers, notifications and the lock field are
-  between 92% and 96%, so the wallpaper is always slightly present.
+- The bar is 82% opaque; menus, launchers and notifications are between 92% and
+  96%, and the lock field sits at 72%, so the wallpaper is always slightly
+  present.
 - Shell borders use the same `hyprland.active-border` gradient as the
   compositor, so a notification, the lock field and the window it sits over
   agree.
@@ -78,12 +79,13 @@ what makes magenta read as an event rather than decoration.
 |---|---|
 | `colors.toml` | The palette. Feeds terminals, editors, btop, the shell and the templates. |
 | `shell.toml` | Bar, menus, launcher, notifications, polkit, lock, image picker. |
+| `gtk.css` | GTK 3 and GTK 4: ink and slate, lavender edges, magenta attention. |
 | `btop.theme` | Slate boxes, lavender throughput, magenta load; no mint. |
 | `icons.theme` | `Yaru-purple-dark`. |
 | `backgrounds/` | Four 16:9 wallpapers, WebP: `01-manga-gaze` and `04-noir-portrait` at 2560×1440, `02-gas-mask` and `03-violet-duo` at 1920×1080. The first is the default. |
 | `backgrounds/intros/` | One 5.4 s silent H.264 clip per wallpaper, named after its still. Each opens slightly tight and off-centre, resolves a brief hologram chroma split and a lavender/ice/magenta scan band, and settles on the exact framing of the still. |
 | `unlock.png` | The Omarchy wordmark in lavender, for Plymouth. |
-| `preview.png`, `preview-terminal.png`, `preview-wallpaper.png`, `preview-unlock.png` | A terminal, file-manager and editor session; a terminal session with fastfetch and btop; the bare desktop; the lock screen. |
+| `preview.webp`, `preview-terminal.webp`, `preview-wallpaper.webp`, `preview-unlock.png` | An editor and file-manager session; the palette specimen beside btop's memory view; the bare desktop; the lock screen. |
 
 No stock files are touched: everything lives in
 `~/.config/omarchy/themes/holo-black/`.
@@ -110,7 +112,7 @@ them, and the preview screenshots show them.
 
 ## License
 
-MIT — see [`LICENSE`](LICENSE) — covers the theme files (palette, configs,
-scripts and README). The wallpapers and their intros are third-party artwork and
+MIT — see [`LICENSE`](LICENSE) — covers the theme files (palette, configs and
+README). The wallpapers and their intros are third-party artwork and
 remain their authors'/uploaders'; they are not licensed under MIT. The Omarchy
 wordmark in `unlock.png` is the Omarchy project's; this theme only recolours it.
